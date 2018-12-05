@@ -1,5 +1,5 @@
-#**vCli Kullanma Kılavuzu**
-###vCli Erişim
+# **vCli Kullanma Kılavuzu**
+### vCli Erişim
 * Username: voltha
 * Password: admin
 ```
@@ -26,7 +26,7 @@ __ _____| | |_| |_  __ _   / __| |  |_ _|
 (voltha) 
 
 ```
-###Adaptörlerin Listelenmesi
+### Adaptörlerin Listelenmesi
 Komut çıktısında; adaptörün id'sini, geliştirildiği vendorü ve voltha'nın içerisine yüklü olan versiyon numarasını sağlar.
 ```
 (voltha) adapters
@@ -88,7 +88,7 @@ Devices:
 +------------------+-------------------+------+------------------+--------------------+-------------+-------------+----------------+----------------+--------------------+-----------------+-------------------------+----------------------+------------------------------+
 
 ```
-###Cihazın İçerisine Girilmesi
+### Cihazın İçerisine Girilmesi
 ``` devices```  komutu çıktısından içerisine girilmesi istenilen cihazın id'si elde edilir.<br/>
 ```
 (voltha) device [id]
