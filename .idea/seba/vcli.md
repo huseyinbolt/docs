@@ -27,7 +27,7 @@ __ _____| | |_| |_  __ _   / __| |  |_ _|
 
 ```
 ###Adaptörlerin Listelenmesi
-Komut çıktısında; adaptörün id'sini, geliştirildiği vendorü ve voltha'nın içerisine yüklü olan versiyon numarasını sağlar.ad    ad
+Komut çıktısında; adaptörün id'sini, geliştirildiği vendorü ve voltha'nın içerisine yüklü olan versiyon numarasını sağlar.
 ```
 (voltha) adapters
 Adapters:
@@ -61,7 +61,7 @@ Adapters:
 +----------------------+---------------------------+---------+
 
 ```
-###Cihazların Listelenmesi
+### Cihazların Listelenmesi
 Komut çıktısı:<br/>
 * **id:** Cihazız id'si
 * **type:** Cihazın kullandığı adaptör
