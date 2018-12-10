@@ -1,7 +1,10 @@
 # **vCli Kullanma Kılavuzu**
+vCli, SEBA'nın voltha modülünü komut satırı üzerinden yönetmek kullanılan arabirimdir. Bu arabirim SEBA ürününde ayrı bir pod olarak çalışır. Voltha komut satırına bağlanmak için vcli servisinin açtığı port üzerinden aşağıdaki kimlik bilgileri ile giriş yapılabilir.
 ### vCli Erişim
 * Username: voltha
 * Password: admin
+
+Komut satırı arabirimine erişmek için açılan servis portuna aşağıdaki gibi ssh ile bağlanılır. Örnekte kullanılan 192.168.70.21 IP'si Kubernetes node IP'sidir. Bu IP yerine cluster'da yer alan herhangi bir node'un IP'si de yazılabilir.
 ```
 ssh -p 30110 voltha@192.168.70.21
 voltha@192.168.70.21's password: 
@@ -27,7 +30,7 @@ __ _____| | |_| |_  __ _   / __| |  |_ _|
 
 ```
 ### Adaptörlerin Listelenmesi
-Komut çıktısında; adaptörün id'sini, geliştirildiği vendorü ve voltha'nın içerisine yüklü olan versiyon numarasını sağlar.
+Sistemin desteklediği OLT/ONT cihazlarının listesine erişmek için ```adapters``` komut kullanılır. Komut çıktısında adaptörün id'si, üreticisi ve voltha'nın içerisine yüklü olan versiyon numarası sağlanır.
 ```
 (voltha) adapters
 Adapters:
@@ -62,7 +65,7 @@ Adapters:
 
 ```
 ### Cihazların Listelenmesi
-``` devices``` komutu ile cihazlar listeleniri
+Sisteme bağlı veya daha önce bağlanmış ve çıkartılmış cihazların (OLT/ONT) listesine erişmel için ``` devices``` komutu kullanılır.
 ```
 (voltha) devices
 Devices:
@@ -72,35 +75,22 @@ Devices:
 | 0001e3129c807616 |           openolt | True | 00010000c0a8461e | 192.168.70.30:9191 |     ENABLED |      ACTIVE |      REACHABLE |                | 192.168.70.30:9191 |                 |                         |                      |                              |
 | 0001e428c6f10c6b | brcm_openomci_onu | True | 0001e3129c807616 |       BRCM12345678 |    DISABLED |             |    UNREACHABLE |      536870912 |                    | omci-admin-lock |        0001e3129c807616 |                    1 |                            1 |
 +------------------+-------------------+------+------------------+--------------------+-------------+-------------+----------------+----------------+--------------------+-----------------+-------------------------+----------------------+------------------------------+
-
 ```
-* **id:** Cihazın fiziksel device id'si
+
+Bu çıktıdaki sütunlar ve açıklamaları aşağıdaki gibidir:
+* **id:** Cihazın fiziksel device id değeri
 * **type:** Cihazın kullandığı adaptör
-* **root:** ?
 * **parent_id:** Cihazın bağlı olduğu bir üst cihazın id'si
 * **serial_number:** Cihazın seri numarası
 * **admin_state:** Cihazın provizyon durumu 
 * **oper_status:** Cihazın çalışma durumu
 * **connect_status:** Cihazın sisteme bağlı olma durumu
-* **parent_port_no:** Bağlı olduğu cihazın bağlı olduğu port numarası
-* **host_and_port:** OLT'lerde cihazın IP ve Tcp Port bilgisi
+* **parent_port_no:** Bağlı olduğu cihaza bağlı olduğu port numarası
+* **host_and_port:** OLT cihazı için IP ve Tcp Port bilgisi
 * **reason:** Cihazın durumunun sebebi
-* **proxy_address.device_id:** ?
-* **proxy_address.onu_id:** ?
-* **proxy_address.onu_session_id:** ?
-```
-(voltha) devices
-Devices:
-+------------------+-------------------+------+------------------+--------------------+-------------+-------------+----------------+----------------+--------------------+-----------------+-------------------------+----------------------+------------------------------+
-|               id |              type | root |        parent_id |      serial_number | admin_state | oper_status | connect_status | parent_port_no |      host_and_port |          reason | proxy_address.device_id | proxy_address.onu_id | proxy_address.onu_session_id |
-+------------------+-------------------+------+------------------+--------------------+-------------+-------------+----------------+----------------+--------------------+-----------------+-------------------------+----------------------+------------------------------+
-| 0001e3129c807616 |           openolt | True | 00010000c0a8461e | 192.168.70.30:9191 |     ENABLED |      ACTIVE |      REACHABLE |                | 192.168.70.30:9191 |                 |                         |                      |                              |
-| 0001e428c6f10c6b | brcm_openomci_onu | True | 0001e3129c807616 |       BRCM12345678 |    DISABLED |             |    UNREACHABLE |      536870912 |                    | omci-admin-lock |        0001e3129c807616 |                    1 |                            1 |
-+------------------+-------------------+------+------------------+--------------------+-------------+-------------+----------------+----------------+--------------------+-----------------+-------------------------+----------------------+------------------------------+
 
-```
 ### Cihazın İçerisine Girilmesi
-``` devices```  komutu çıktısından içerisine girilmesi istenilen cihazın id'si elde edilir.<br/>
+``` devices``` komutu çıktısından içerisine girilmesi istenilen cihazın id'si elde edilir.<br/>
 ```
 (voltha) device [id]
 ```
@@ -109,7 +99,7 @@ komutu ile istenilen cihazın içerisine girilir.
 (voltha) device 0001e3129c807616
 (device 0001e3129c807616) 
 ```
-Cihazın içerisinde yapılabilecek komutlar:
+Cihazın içerisinde çalıştırılabilecek komutlar:
  * ``` ports ``` komutu
  ```
  (device 0001e3129c807616) ports
@@ -176,7 +166,7 @@ Cihazın içerisinde yapılabilecek komutlar:
   * * **goto-table :** Akışın eşleştikten sonra gideceği tablo numarası
   
 ### Mantıksal Cihazların Listelenmesi
-``` logical devices``` komutu ile mantıksal cihazlar listelenir.
+SDN kontrolcü OLT/ONT cihazlarını tek bir mantıksal (logical) aygıt olarak görür. Bu aygıtların listesine erişmek için ``` logical devices``` komutu kullanılır.
 ```
 (voltha) logical_devices
 Logical devices:
@@ -186,9 +176,9 @@ Logical devices:
 | 00010000c0a8461e | 00000000c0a8461e | 0001e3129c807616 | 192.168.70.30:9191 |                       256 |                        2 |
 +------------------+------------------+------------------+--------------------+---------------------------+--------------------------+
 ```
-* **id:** Cihazız logical_device id'si
-* **datapath_id:** Cihazın sdn kontrolcü tarafından yönettiği datapath_id'si
+* **id:** Cihazın logical_device id'si
+* **datapath_id:** Cihazın datapath_id'si
 * **root_device_id:** Cihazın fiziksel device id karşılığı
-* **desc.serial_num:** Cihazın sdn kontrolcü tarafından bilinen seri numarası
+* **desc.serial_num:** Cihazın SDN kontrolcü tarafından bilinen seri numarası
 * **switch_features.n_buffers:** Gelen paketin kontrolcüye hangi boyutlarda gönderileceği bilgisi
 * **switch_features.n_tables:** OpenFlow anahtarlayıcının toplam tablo sayısı
