@@ -94,13 +94,13 @@ Bu çıktıdaki sütunlar ve açıklamaları aşağıdaki gibidir:
 ```
 (voltha) device [id]
 ```
-komutu ile istenilen cihazın içerisine girilir.
+komutu ile istenilen cihazın içerisine girilir.<br/>
 ```
 (voltha) device 0001e3129c807616
 (device 0001e3129c807616) 
 ```
-Cihazın içerisinde çalıştırılabilecek komutlar:
- * ``` ports ``` komutu
+Cihazın içerisinde çalıştırılabilecek komutlar:<br/>
+ * ``` ports ``` komutu<br/>
  ```
  (device 0001e3129c807616) ports
  Device ports:
