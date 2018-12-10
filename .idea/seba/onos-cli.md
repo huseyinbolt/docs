@@ -1,5 +1,7 @@
-# **Onos-CLI Kullanma Kılavuzu**
-### Onos-Cli Erişim
+# **ONOS-CLI Kullanma Kılavuzu**
+### ONOS-Cli Erişim
+SEBA çözümünde SDN kontrolcü olarak ONOS kullanılmaktadır. ONOS hem UI üzerinden hem de komut satırı üzerinden erişilebilecek şekilde servisler açar. Komut satırından erişmek için aşağıdaki bilgiler kullanılabilir:
+
 * Username: onos
 * Password: rocks
 ```
@@ -25,14 +27,14 @@ onos>
 ```
 
 ### Cihazların Listelenmesi
-``` devices``` komutu ile cihazlar listelenir.
+SDN kontrolcünün keşfettiği cihazları listelemek için ``` devices``` komutu kullanılır:
 ```
 onos> devices
 id=of:0000000000000001, available=true, local-status=connected 3d19h ago, role=MASTER, type=SWITCH, mfr=Accton Corp., hw=x86-64-accton-as7712-32x-r0, sw=ofdpa 3.0.5.5+accton1.7-1, serial=771232X1744006, chassis=1, driver=ofdpa3, channelId=10.233.102.128:36021, locType=none, managementAddress=10.233.102.128, name=Fabric Switch - Leaf1, protocol=OF_13
 id=of:00000000c0a8461e, available=true, local-status=connected 3d17h ago, role=MASTER, type=SWITCH, mfr=VOLTHA Project, hw=, sw=, serial=192.168.70.30:9191, chassis=c0a8461e, driver=voltha, channelId=10.233.75.23:37132, locType=none, managementAddress=10.233.75.23, name=olt-1, protocol=OF_13
 ```
-* **id:** Cihazın openflow id'si
-* **available:** Bağlantının olup işlem yapılabilirliği
+* **id:** Cihazın openflow id'si (datapathid)
+* **available:** Openflow bağlantısının aktif olup olmadığı bilgisi
 * **local-status:** Ne kadar süredir bağlı olduğu
 * **role:** Kontrolcünün cihaz üzerindeki rolü
 * **type:** Cihaz tipi
@@ -41,7 +43,7 @@ id=of:00000000c0a8461e, available=true, local-status=connected 3d17h ago, role=M
 * **sw:** Cihazın içinde yüklü olan yazılım sürümü
 * **serial:** Cihazın seri numarası
 * **chassis:** Şase numarası
-* **driver:** Cihazın kontrolcünün içerisindeki eşleşeceği driver
+* **driver:** Cihazın kontrolcünün içerisinde eşleşeceği driver
 * **channelId:** Cihazın kontrolcüye bağlandığı IP:TCP_Port bilgisi
 * **managementAddress:** Cihazın yönetim IP adres bilgisi
 * **name:** Cihazın ismi
@@ -104,7 +106,7 @@ id=of:00000000c0a8461e, available=true, local-status=connected 3d17h ago, role=M
  * * **portMac:** Porta MAC adresi
  * * **portName:** Portun ismi
 
-### Cihazın Akış Bilgilerini Listelenmesi
+### Cihazın Akış Bilgilerinin Listelenmesi
 * ``` flows ``` komutu ile akışlar görüntülenir.
  ```
 onos> flows
@@ -155,10 +157,11 @@ deviceId=of:00000000c0a8461e, flowRuleCount=3
   * * **selector:** Akışın özel olarak eşleşeceği seçenekleri (Giriş portu, MAC adresi, Vlan Etiketi gibi)
   * * **treatment:** Akış eşleşirse ona uygulanacak aksiyon
   * * **transition:** Akışın eşleştikten sonra gideceği tablo numarası
-  * * **meter:** Akışa eklencek meter değeri
+  * * **meter:** Akışa eklenecek meter değeri
 
   
 ### LOG Bilgileri
+ONOS'un loglarını komut satırından izlemek, log seviyesini değiştirmek için ```log``` komutu kullanılabilir. 
 * ```log:list``` komutu ile log seviyesi görüntülenir.
 ```
 onos> 
