@@ -1,4 +1,9 @@
-Aşağıda belirtilen yeşil kısım /etc/init.d/openolt dosyasına eklenmelidir.
+/etc/init.d/openolt dosyasına 
+```
+LD_LIBRARY_PATH="/usr/local/lib/"
+export LD_LIBRARY_PATH
+```
+eklenmelidir.
 ```
 root@localhost:~# cat  /etc/init.d/openolt 
 #!/bin/sh
