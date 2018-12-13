@@ -1,4 +1,4 @@
-Aşağıda belirtilen yeşil kısın /etc/init.d/openolt dosyasına eklenmelidir.
+Aşağıda belirtilen yeşil kısım /etc/init.d/openolt dosyasına eklenmelidir.
 ```
 root@localhost:~# cat  /etc/init.d/openolt 
 #!/bin/sh
