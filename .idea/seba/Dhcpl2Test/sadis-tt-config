@@ -1,0 +1,65 @@
+{  
+"apps" : {
+  "org.opencord.sadis" : {
+      "sadis" : {
+        "integration" : {
+          "cache" : {
+            "enabled" : true,
+            "maxsize" : 50,
+            "ttl" : "PT1m"
+          }
+        },
+        "entries" : [ {
+		"id":"s1-eth1",
+		"nasPortId":"s1-eth1",
+		"services":2,
+		"uniServiceList" : [
+{
+"uniTagMatch": 100,
+"uniPriorityMatch": "TRUE",
+"uniUntaggedMatch": "TRUE",
+"ponCTag": "0",
+"ponSTag": "2",
+"ponCTagPriority": "copy", 
+"ponSTagPriority": "copy",
+"technologyProfileId":64,
+"downstreamBandwidthProfile":"service1-down",
+"upstreamBandwidthProfile":"service1-up"
+},
+{
+"uniTagMatch": 200,
+"uniPriorityMatch": "FALSE",
+"uniUntaggedMatch": "FALSE",
+"ponCTag": "3",
+"ponSTag": "20",
+"ponCTagPriority": "copy",
+"ponSTagPriority": "copy",
+"technologyProfileId":65,
+"downstreamBandwidthProfile":"service2-down",
+"upstreamBandwidthProfile":"service2-up"
+}]
+
+        }, {
+          "id" : "1",
+          "hardwareIdentifier" : "00:00:00:00:00:01",
+          "ipAddress" : "127.0.0.1",
+          "uplinkPort": "2"
+        } ]
+      }
+    },
+    "org.opencord.dhcpl2relay" : {
+      "dhcpl2relay" : {
+        "dhcpServerConnectPoints" : [ "of:0000000000000001/2" ],
+        "useOltUplinkForServerPktInOut" : true
+      }
+    }
+  },
+   "devices":{  
+      "of:0000000000000001":{  
+         "basic":{  
+            "driver":"pmc-olt"
+         }
+      }
+   }
+}
+
