@@ -1,0 +1,26 @@
+Debug Kablo Code 10 Hatası alınırsa:
+http://www.totalcardiagnostics.com/support/Knowledgebase/Article/View/92/20/prolific-usb-to-serial-fix-official-solution-to-code-10-error
+
+Steps:
+
+Download and save the "PL2303_64bit_ Installer.exe" by clicking here.
+Unplug all USB-To-Serial adapters from your computer - and double-click on "PL2303_64bit_Installer.exe"
+When it prompts you, plug in one (1) of your USB-To-Serial adapters and click "Continue".
+Reboot your computer. That's it!
+
+
+Troubleshooting:
+
+You must follow ever step in the process in exact order.
+
+If you still receive an error after running the PL-2303_64bit_Installer.exe and your device is plugged in - go to Windows Device Manager.
+
+Windows Vista/7/8/10: Control Panel » System » Device Manager
+Windows XP: Control Panel » System » "Hardware" tab » Device Manager
+Scroll down to Ports (Com & LPT) and double-click on "Prolific USB-to-Serial Comm Port (COM#)".
+In the Properties Window, Click on "Driver".
+The "Driver Version" must say "3.3.2.102" dated 09/24/08.
+
+If not, then the correct driver is not installed.
+
+Unplug the USB-To-Serial adapter and run the "PL2303_64bit_Installer.exe" again - following the directions precisely until the correct driver appears.
